@@ -1,0 +1,23 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ conda ]
+  pull_request:
+    branches: [ conda ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: prepare
+      run: conda create -y -n test python=3.9 numpy libblas=*=*mkl
+      run: conda activate test
+      run: python -c "import numpy as np"
+    - name: make
+      run: make hello
+    - name: test
+      run: ./bin/hello
