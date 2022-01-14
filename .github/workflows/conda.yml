@@ -16,7 +16,7 @@ jobs:
     - name: prepare
       run: |
         conda create -n test -y -c conda-forge python=3.9 numpy libblas=*=*mkl
-        conda activate test
+        source activate test
         python -c "import numpy as np"
     - name: make
       run: make hello
