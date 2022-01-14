@@ -17,10 +17,12 @@ jobs:
       run: |
         source $CONDA/etc/profile.d/conda.sh
         conda create -n test -y -c conda-forge python=3.9 numpy libblas=*=*mkl
+    - name: make
+      run: |
+        source $CONDA/etc/profile.d/conda.sh
         conda activate test
         conda list
         python -c "import numpy as np; print(np.version.version)"
-    - name: make
-      run: make hello
+        make hello
     - name: test
       run: ./bin/hello
