@@ -15,8 +15,9 @@ jobs:
     - uses: actions/checkout@v2
     - name: prepare
       run: |
+        source $CONDA/etc/profile.d/conda.sh
         conda create -n test -y -c conda-forge python=3.9 numpy libblas=*=*mkl
-        source activate test
+        conda activate test
         python -c "import numpy as np"
     - name: make
       run: make hello
