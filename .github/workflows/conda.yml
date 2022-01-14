@@ -14,9 +14,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: prepare
-      run: conda create -y -n test python=3.9 numpy libblas=*=*mkl
-      run: conda activate test
-      run: python -c "import numpy as np"
+      run: |
+        conda create -y -n test python=3.9 numpy libblas=*=*mkl
+        conda activate test
+        python -c "import numpy as np"
     - name: make
       run: make hello
     - name: test
