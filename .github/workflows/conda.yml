@@ -26,3 +26,13 @@ jobs:
         make hello
     - name: test
       run: ./bin/hello
+    - name: Make distribution
+      run: |
+        mkdir -p dist
+        cp src/dummy.txt dist
+        cp ./bin/hello dist
+    - name: Archive distribution
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist
+          path: dist
