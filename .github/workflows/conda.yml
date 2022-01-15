@@ -1,4 +1,4 @@
-name: C/C++ CI
+name: Conda C/C++ CI
 
 on:
   push:
