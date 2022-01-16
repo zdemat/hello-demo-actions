@@ -28,7 +28,10 @@ jobs:
     - name: powershell conda
       run: |
         C:\Miniconda\shell\condabin\conda-hook.ps1
+        echo $CONDA
         conda activate test
+        conda list
+        dir C:/
     - name: make
       shell: bash
       run: |
