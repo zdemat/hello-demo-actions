@@ -18,16 +18,16 @@ jobs:
       shell: cmd
       run: |
         call C:\Miniconda\condabin\conda_hook.bat
-        conda create -y -n test -c conda-forge vs2019_win-64
+        call conda create -y -n test -c conda-forge vs2019_win-64
     - name: Useless
       shell: cmd
       run: |
         call C:\Miniconda\condabin\conda_hook.bat
-        conda info --envs
+        call conda info --envs
         dir C:\Miniconda\envs\test\etc\conda\activate.d
         dir C:\
-        conda activate test
-        vswhere -latest
+        call conda activate test
+        call vswhere -latest
         echo "bla bla"
     - name: locate VS
       shell: bash
