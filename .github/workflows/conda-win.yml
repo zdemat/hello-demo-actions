@@ -15,10 +15,10 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
     - name: Prepare environment
-      shell: bash
       run: |
-        source $CONDA/etc/profile.d/conda.sh
+        C:\Miniconda\shell\condabin\conda-hook.ps1
         conda create -n test -y -c conda-forge python=3.9 numpy libblas=*=*mkl vs2019_win-64
+        conda activate test
     - name: locate VS
       shell: bash
       run: |
