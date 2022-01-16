@@ -20,7 +20,7 @@ jobs:
         source $CONDA/etc/profile.d/conda.sh
         conda create -n test -y -c conda-forge python=3.9 numpy libblas=*=*mkl
     - name: make
-      shaell: bash
+      shell: bash
       run: |
         source $CONDA/etc/profile.d/conda.sh
         conda activate test
