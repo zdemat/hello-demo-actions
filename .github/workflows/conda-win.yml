@@ -24,7 +24,7 @@ jobs:
       run: |
         source $CONDA/etc/profile.d/conda.sh
         conda activate test
-        vswhere
+        vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64
     - name: make
       shell: bash
       run: |
