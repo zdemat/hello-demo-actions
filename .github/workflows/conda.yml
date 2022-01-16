@@ -7,14 +7,14 @@ on:
     branches: [ conda ]
 
 jobs:
-  build:
+  build workflow:
 
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-    - name: prepare
+    - name: prepare bla bla
       run: |
         source $CONDA/etc/profile.d/conda.sh
         conda create -n test -y -c conda-forge python=3.9 numpy libblas=*=*mkl
