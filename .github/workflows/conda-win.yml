@@ -29,8 +29,11 @@ jobs:
         export CPPPATH=$P/Library/include:$P/include
         export LIBRARY_PATH=$P/libs:$P/Library/lib
         cat "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\Microsoft.VCToolsVersion.default.txt"
-        ls "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC"        
+        echo "bla bla"
+        ls "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC"
+        ls "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30133\bin\HostX64\x64"        
         vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
+        echo "blo bli"
         export VS_InstallDir=$(vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath)
         export VS_Version=$(cat $VS_InstallDir/VC/Auxiliary/Build/Microsoft.VCToolsVersion.default.txt)
         echo $VS_Version
