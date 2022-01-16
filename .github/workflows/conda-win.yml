@@ -1,0 +1,43 @@
+name: Conda C/C++ CI (win)
+
+on:
+  push:
+    branches: [ conda ]
+  pull_request:
+    branches: [ conda ]
+
+jobs:
+  build-workflow:
+
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    - name: Prepare environment
+      shell: bash
+      run: |
+        source $CONDA/etc/profile.d/conda.sh
+        conda create -n test -y -c conda-forge python=3.9 numpy libblas=*=*mkl
+    - name: make
+      shaell: bash
+      run: |
+        source $CONDA/etc/profile.d/conda.sh
+        conda activate test
+        conda list
+        python -c "import numpy as np; print(np.version.version)"
+        make hello
+    - name: test
+      shell: bash
+      run: ./bin/hello
+    - name: Make distribution
+      shell: bash
+      run: |
+        mkdir -p dist
+        cp src/dummy.txt dist
+        cp ./bin/hello dist
+    - name: Archive distribution
+      uses: actions/upload-artifact@v2
+      with:
+        name: dist-win
+        path: dist
