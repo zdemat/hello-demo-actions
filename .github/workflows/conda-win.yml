@@ -25,12 +25,6 @@ jobs:
         source $CONDA/etc/profile.d/conda.sh
         conda activate test
         vswhere -latest -property installationPath
-    - name: locate VS powershell
-      run: |
-        echo $CONDA
-        $CONDA\Scripts\activate.bat
-        conda activate test
-        vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64
     - name: make
       shell: bash
       run: |
@@ -44,9 +38,9 @@ jobs:
         echo "bla bla"
         ls "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC"
         ls "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30133\bin\HostX64\x64"        
-        vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
+        vswhere -latest -property installationPath
         echo "blo bli"
-        export VS_InstallDir=$(vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath)
+        export VS_InstallDir=$(vswhere -latest -property installationPath)
         export VS_Version=$(cat $VS_InstallDir/VC/Auxiliary/Build/Microsoft.VCToolsVersion.default.txt)
         echo $VS_Version
         export PATH=$VS_InstallDir/VC/Tools/MSVC/$VS_Version/bin/HostX64/x64:$PATH
