@@ -26,10 +26,8 @@ jobs:
         conda activate test
         conda list
         python -c "import numpy as np; print(np.version.version)"
-        echo "CXX: " $CXX
-        which c++
-        c++ -v
-        make hello
+        cl
+        make hello-win
     - name: test
       shell: bash
       run: ./bin/hello
