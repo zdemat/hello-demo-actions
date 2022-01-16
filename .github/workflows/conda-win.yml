@@ -29,8 +29,8 @@ jobs:
         export CPPPATH=$P/Library/include:$P/include
         export LIBRARY_PATH=$P/libs:$P/Library/lib
         export VS_InstallDir=$(vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath)
-	export VS_Version=$(cat $VS_InstallDir/VC/Auxiliary/Build/Microsoft.VCToolsVersion.default.txt)
-	echo $VS_Version
+        export VS_Version=$(cat $VS_InstallDir/VC/Auxiliary/Build/Microsoft.VCToolsVersion.default.txt)
+        echo $VS_Version
 	export PATH=$VS_InstallDir/VC/Tools/MSVC/$VS_Version/bin/HostX64/x64:$PATH
         echo $PATH
         python -c "import numpy as np; print(np.version.version)"
