@@ -19,7 +19,8 @@ jobs:
       run: |
         source $CONDA/etc/profile.d/conda.sh
         conda create -n test -y -c conda-forge python=3.9 numpy libblas=*=*mkl vs2019_win-64
-    - name: loacate VS
+    - name: locate VS
+      shell: bash
       run: |
         source $CONDA/etc/profile.d/conda.sh
         conda activate test
