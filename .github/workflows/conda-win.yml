@@ -25,12 +25,18 @@ jobs:
         source $CONDA/etc/profile.d/conda.sh
         conda activate test
         conda list
+        set P=conda info --json | grep default_prefix | cut -d '"' -f4
+        set CPPPATH=%P%/Library/include;%P%/include
+        set LIBRARY_PATH=%P%/libs;%P%/Library/lib
+        echo %PATH%
         python -c "import numpy as np; print(np.version.version)"
         cl
         make hello-win
     - name: test
       shell: bash
-      run: ./bin/hello
+      run: |
+        set P=conda info --json | grep default_prefix | cut -d '"' -f4
+        ./bin/hello
     - name: Make distribution
       shell: bash
       run: |
