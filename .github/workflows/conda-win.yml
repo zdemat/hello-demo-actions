@@ -28,7 +28,8 @@ jobs:
         export P=$(conda info --json | grep default_prefix | cut -d '"' -f4)
         export CPPPATH=$P/Library/include:$P/include
         export LIBRARY_PATH=$P/libs:$P/Library/lib
-        ls "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise"
+        cat "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\Microsoft.VCToolsVersion.default.txt"
+        ls "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC"        
         vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
         export VS_InstallDir=$(vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath)
         export VS_Version=$(cat $VS_InstallDir/VC/Auxiliary/Build/Microsoft.VCToolsVersion.default.txt)
