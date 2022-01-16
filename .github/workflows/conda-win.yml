@@ -25,6 +25,11 @@ jobs:
         source $CONDA/etc/profile.d/conda.sh
         conda activate test
         vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64
+    - name: locate VS powershell
+      run: |
+        %CONDA%\Scripts\activate.bat
+        conda activate test
+        vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64
     - name: make
       shell: bash
       run: |
