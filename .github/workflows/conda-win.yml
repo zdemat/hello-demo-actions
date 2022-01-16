@@ -41,9 +41,9 @@ jobs:
         vswhere -latest -property installationPath
         echo "blo bli"
         export VS_InstallDir=$(vswhere -latest -property installationPath)
-        export VS_Version=$(cat $VS_InstallDir/VC/Auxiliary/Build/Microsoft.VCToolsVersion.default.txt)
+        export VS_Version=$(cat "$VS_InstallDir/VC/Auxiliary/Build/Microsoft.VCToolsVersion.default.txt")
         echo $VS_Version
-        export PATH=$VS_InstallDir/VC/Tools/MSVC/$VS_Version/bin/HostX64/x64:$PATH
+        export PATH="$VS_InstallDir/VC/Tools/MSVC/$VS_Version/bin/HostX64/x64":$PATH
         echo $PATH
         python -c "import numpy as np; print(np.version.version)"
         cl
