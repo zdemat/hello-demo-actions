@@ -21,7 +21,9 @@ jobs:
         conda create -n test vs2019_win-64
         conda activate test
         dir C:\Miniconda\envs\test\etc\conda\activate.d
-        vswhere -latest -property installationPath
+        dir C:\
+        vswhere -latest
+        echo "bla bla"
     - name: locate VS
       shell: bash
       run: |
