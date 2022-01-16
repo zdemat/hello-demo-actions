@@ -7,7 +7,7 @@ on:
     branches: [ conda ]
 
 jobs:
-  build workflow:
+  build-workflow:
 
     runs-on: ubuntu-latest
 
