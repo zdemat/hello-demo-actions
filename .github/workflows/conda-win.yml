@@ -18,7 +18,8 @@ jobs:
       shell: cmd
       run: |
         call C:\Miniconda\condabin\conda_hook.bat
-        conda create -n test -y -c conda-forge python=3.9 numpy libblas=*=*mkl vs2019_win-64
+        #conda create -n test -y -c conda-forge python=3.9 numpy libblas=*=*mkl vs2019_win-64
+        conda create -n test vs2019_win-64
         conda activate test
         dir C:\Miniconda\envs\test\etc\conda\activate.d
     - name: locate VS
