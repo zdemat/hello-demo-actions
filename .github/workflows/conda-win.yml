@@ -17,60 +17,34 @@ jobs:
     - name: Prepare environment
       shell: cmd
       run: |
-        call C:\Miniconda\condabin\conda_hook.bat
+        rem Conda VC set env script works only with cmd on Win
+        rem Source conda hook
+        set CONDA=C:\Miniconda
+        call %CONDA%\condabin\conda_hook.bat
         call conda create -y -n test -c conda-forge vs2019_win-64
-    - name: Useless
+    - name: make
       shell: cmd
       run: |
-        call C:\Miniconda\condabin\conda_hook.bat
-        call conda info --envs
-        dir C:\Miniconda\envs\test\etc\conda\activate.d
-        dir C:\
+        set CONDA=C:\Miniconda
+        call %CONDA%\condabin\conda_hook.bat
         call conda activate test
-        call vswhere -latest
-        echo "bla bla"
-    - name: locate VS
-      shell: bash
-      run: |
-        source $CONDA/etc/profile.d/conda.sh
-        conda activate test
-        vswhere -latest -property installationPath
-    - name: powershell conda
-      run: |
-        C:\Miniconda\shell\condabin\conda-hook.ps1
-        echo $CONDA
-        conda activate test
-        conda list
-        dir C:/
-    - name: make
-      shell: bash
-      run: |
-        source $CONDA/etc/profile.d/conda.sh
-        conda activate test
-        conda list
-        export P=$(conda info --json | grep default_prefix | cut -d '"' -f4)
-        export CPPPATH=$P/Library/include:$P/include
-        echo "CPPPATH" $CPPPATH
-        export LIBRARY_PATH=$P/libs:$P/Library/lib
-        cat "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\Microsoft.VCToolsVersion.default.txt"
-        echo "bla bla"
-        ls "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC"
-        ls "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.29.30133\bin\HostX64\x64"        
-        vswhere -latest -property installationPath
-        echo "blo bli"
-        export VS_InstallDir=$(vswhere -latest -property installationPath)
-        export VS_Version=$(cat "$VS_InstallDir/VC/Auxiliary/Build/Microsoft.VCToolsVersion.default.txt")
-        echo $VS_Version
-        export PATH="/c/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/VC/Tools/MSVC/14.29.30133/bin/HostX64/x64":$PATH
-        #export PATH="$VS_InstallDir/VC/Tools/MSVC/$VS_Version/bin/HostX64/x64":$PATH
-        echo $PATH
-        python -c "import numpy as np; print(np.version.version)"
+        rem Get conda env prefix
+        call conda info --json | grep default_prefix > _tmp_path1.txt
+        (for /f tokens^=3^,4^,*^ delims^=^" %%a in (_tmp_path1.txt) do echo %%b) > _tmp_path2.txt
+        for /f "usebackq tokens=*" %%i in (`cat _tmp_path2.txt`) do (
+          set P=%%i
+        )
+        set P=%P:\\=\%
+        echo P=%P%
+        rem Set CPP env variables
+        set CPPPATH=%P%\Library\include;%P%\include
+        echo "CPPPATH" %CPPPATH%
+        set LIBRARY_PATH=%P%\Library\lib;%P%\libs
         cl
         make hello-win
     - name: test
       shell: bash
       run: |
-        set P=conda info --json | grep default_prefix | cut -d '"' -f4
         ./bin/hello
     - name: Make distribution
       shell: bash
