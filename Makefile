@@ -4,7 +4,7 @@ hello: src/main.cpp
 
 hello-win: src/main.cpp
 	mkdir -p bin
-	cl src/main.cpp /o bin/hello.exe
+	cl src\main.cpp /link /OUT:bin\hello.exe
 
 clean:
 	rm -rf bin/hello src/*.o

@@ -17,12 +17,12 @@ jobs:
     - name: Prepare environment
       shell: cmd
       run: |
-        rem Conda VC set env script works only with cmd on Win
+        rem Note: Conda VC setenv-script works only with cmd on Win
         rem Source conda hook
         set CONDA=C:\Miniconda
         call %CONDA%\condabin\conda_hook.bat
         call conda create -y -n test -c conda-forge vs2019_win-64
-    - name: make
+    - name: Build project
       shell: cmd
       run: |
         set CONDA=C:\Miniconda
@@ -35,17 +35,15 @@ jobs:
           set P=%%i
         )
         set P=%P:\\=\%
-        echo P=%P%
+        echo conda_prefix: %P%
         rem Set CPP env variables
         set CPPPATH=%P%\Library\include;%P%\include
-        echo "CPPPATH" %CPPPATH%
         set LIBRARY_PATH=%P%\Library\lib;%P%\libs
-        cl
         make hello-win
-    - name: test
-      shell: bash
+    - name: Test
+      shell: cmd
       run: |
-        ./bin/hello
+        bin/hello
     - name: Make distribution
       shell: bash
       run: |
