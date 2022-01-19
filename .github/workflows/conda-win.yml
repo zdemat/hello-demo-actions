@@ -43,7 +43,7 @@ jobs:
     - name: Test
       shell: cmd
       run: |
-        bin/hello
+        call bin\hello
     - name: Make distribution
       shell: bash
       run: |
